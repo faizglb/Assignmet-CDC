@@ -1,7 +1,20 @@
 Problem Statements : 
+You are given an array nums consisting of positive integers.
+Return the total frequencies of elements in nums such that those elements all have the maximum frequency.
+The frequency of an element is the number of occurrences of that element in the array.
 
-Reversing the array
-finding maximum and minimum elements
-Running sum of 1d Array 
-count elements with maximum frequency  
-left/right rotate an array by k positions
+Solution:
+class Solution(object):
+    def maxFrequencyElements(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        from collections import Counter
+        
+        freq = Counter(nums)
+        max_freq = max(freq.values())
+        
+        count = sum(v for v in freq.values() if v == max_freq)
+        return count
+
