@@ -1,7 +1,39 @@
 Problem Statements : 
 
-Reversing the array
-finding maximum and minimum elements
-Running sum of 1d Array 
-count elements with maximum frequency  
-left/right rotate an array by k positions
+Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+Solution:
+class Solution(object):
+    def rotate(self, nums, k, direction='right'):
+        """
+        Rotates the array in-place.
+        :type nums: List[int]
+        :type k: int
+        :type direction: str ('right' or 'left')
+        :rtype: None
+        """
+        n = len(nums)
+        if n == 0:
+            return
+        k %= n
+        if k == 0:
+            return
+
+        # Helper function to reverse a portion of the list
+        def reverse(arr, l, r):
+            while l < r:
+                arr[l], arr[r] = arr[r], arr[l]
+                l += 1
+                r -= 1
+
+        # For RIGHT rotation
+        if direction == 'right':
+            reverse(nums, 0, n - 1)
+            reverse(nums, 0, k - 1)
+            reverse(nums, k, n - 1)
+        
+        # For LEFT rotation
+        elif direction == 'left':
+            reverse(nums, 0, k - 1)
+            reverse(nums, k, n - 1)
+            reverse(nums, 0, n - 1)
